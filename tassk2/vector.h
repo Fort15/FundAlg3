@@ -4,19 +4,6 @@
 
 #include <stddef.h>
 
-#ifndef VECTOR_TYPE
-#error "VECTOR_TYPE must be defined before including vector.h"
-#endif
-
-VECTOR_TYPE VECTOR_COPY(VECTOR_TYPE value);
-
-void VECTOR_DELETE(VECTOR_TYPE value);
-
-// #define VECTOR_TYPE char*
-// char* vector_copy(char* value) { return strdup(value); }
-// void vector_delete(char* value) { free(value); }
-
-
 
 typedef struct {
     VECTOR_TYPE *data;

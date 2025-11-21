@@ -1,3 +1,5 @@
+#include "vector_config.h"
+
 #include "vector.h"
 #include <stdlib.h>
 
@@ -29,13 +31,16 @@ void erase_vector(Vector *v) {
     v->capacity = 0;
 }
 
+#include <string.h>
 int is_equal_vector(const Vector *v1, const Vector *v2) {
     if (!v1 || !v2) return 0;
     if (v1->size != v2->size) return 0;
     for (size_t i = 0; i < v1->size; ++i) {
-        VECTOR_TYPE a = v1->data[i];
-        VECTOR_TYPE b = v2->data[i];
-        if (!(a == b)) return 0;
+        #ifdef VECTOR_COMPARE_STRINGS
+            if (strcmp(v1->data[i], v2->data[i]) != 0) return 0; 
+        #else
+            if (v1->data[i] != v2->data[i]) return 0;
+        #endif
     }
     return 1;
 }
@@ -113,4 +118,5 @@ VECTOR_TYPE get_at_vector(const Vector *v, size_t index) {
 void delete_vector(Vector *v) {
     if (!v) return;
     erase_vector(v);
+    free(v);
 }

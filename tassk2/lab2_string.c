@@ -12,17 +12,17 @@ int main() {
         return 1;
     }
 
-    push_back_vector(&v, 10);
-    push_back_vector(&v, 20);
-    push_back_vector(&v, 30);
+    push_back_vector(&v, "Alex");
+    push_back_vector(&v, "John");
+    push_back_vector(&v, "Obama");
 
-    printf("v[0]=%d, v[1]=%d, v[2]=%d\n",
+    printf("v[0]=%s, v[1]=%s, v[2]=%s\n",
            get_at_vector(&v, 0), get_at_vector(&v, 1), get_at_vector(&v, 2));
 
     // Копирование
     Vector v2 = create_vector(1, VECTOR_COPY, VECTOR_DELETE);
     copy_vector(&v2, &v);
-    printf("v2 size: %zu, v2[2]=%d\n", v2.size, get_at_vector(&v2, 2));
+    printf("v2 size: %zu, v2[2]=%s\n", v2.size, get_at_vector(&v2, 2));
     printf("v2==v? %s\n", is_equal_vector(&v, &v2) ? "YES" : "NO");
 
     // Новый вектор
@@ -34,7 +34,7 @@ int main() {
     }
 
     delete_at_vector(&v, 1);
-    printf("delete_at_vector(&v, 1): v[0]=%d, v[1]=%d, size=%zu\n",
+    printf("delete_at_vector(&v, 1): v[0]=%s, v[1]=%s, size=%zu\n",
            get_at_vector(&v, 0), get_at_vector(&v, 1), v.size);
 
     erase_vector(&v);

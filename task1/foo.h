@@ -11,7 +11,8 @@ typedef enum {
     STATUS_TOO_BIG_INT,
 } Status;
 
-
+int add_i(int a, int b);
+int subtract_i(int a, int b);
 Status stroka_to_int(const char *stroka, int *chislo);
 int foo(int value, size_t val_size, char **bufers);
 char* normalize(char* str);
