@@ -69,21 +69,26 @@ int foo(int value, size_t val_size, char **buffers) {
     int max_digit = 2;
     unsigned int val = (value < 0) ? (unsigned int)(negative((long long)value)) : (unsigned int)value;
     int sign = (value < 0) ? -1 : 1;
-    int max_bit = (int)val_size << 8;
+    int max_bit = (int)val_size << 3;
     for (int r = 1; r <= 5; r = add_i(r, 1)) {
         int digit_index = 0;
+        int buffer_r_index = subtract_i(r, 1);
+        int mask = subtract_i(max_digit, 1);
         for (int bit = 0; bit < max_bit; bit = add_i(bit, r)) { 
-            int digit = ((val >> bit) & (subtract_i(digit, 1)));
-            buffers[subtract_i(r, 1)][add_i(digit_index, 1)] = (digit <= 9) ? add_i(digit, '0') : subtract_i(add_i(digit, 'A'), 10); 
+            int digit = (val >> bit) & mask;
+            buffers[buffer_r_index][digit_index] = (digit <= 9) ? (char)add_i(digit, '0') : (char)add_i(digit, 55); 
             digit_index = add_i(digit_index, 1);
         }
         
-        if (sign == -1) {buffers[subtract_i(r, 1)][add_i(digit_index, 1)] = '-'; digit_index = add_i(digit_index, 1);}
-        int max_i = digit_index >> 2;
+        if (sign == -1) {buffers[buffer_r_index][digit_index] = '-'; digit_index = add_i(digit_index, 1);}
+        int max_i = digit_index >> 1;
         for (int i = 0; i < max_i; i = add_i(i, 1)) {
-            char temp = buffers[subtract_i(r, 1)][i];
-            buffers[subtract_i(r, 1)][i] = buffers[subtract_i(r, 1)][subtract_i(subtract_i(digit_index, 1), i)];
-            buffers[subtract_i(r, 1)][subtract_i(subtract_i(digit_index, 1), i)] = temp;
+            int last_index = subtract_i(digit_index, 1);
+            int swap_index = subtract_i(last_index, i);
+
+            char temp = buffers[buffer_r_index][i];
+            buffers[buffer_r_index][i] = buffers[buffer_r_index][swap_index];
+            buffers[buffer_r_index][swap_index] = temp;
         }
         max_digit <<= 1;
         buffers[subtract_i(r, 1)][digit_index] = '\0';
