@@ -5,12 +5,12 @@
 #include "Liver.h"
 
 
-
 typedef struct Node {     
     Liver* data;  
     struct Node *prev;     
     struct Node *next;  
 } Node;  
+
 typedef struct {     
     Node *head;    
     Node *tail;     
