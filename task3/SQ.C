@@ -4,7 +4,6 @@
 void push_stack(LinkedList *stack, const Liver* value) {
     if (!stack || !value) return;
     push_back_list(stack, value);
-    return;
 }
 
 Liver* pop_stack(LinkedList *stack) {
@@ -20,7 +19,6 @@ Liver* peek_stack(const LinkedList *stack) {
 void enqueue(LinkedList *queue, const Liver* value) {
     if (!queue || !value) return;
     push_back_list(queue, value);
-    return;
 }
 
 Liver* dequeue(LinkedList *queue) {

@@ -1,5 +1,7 @@
 #include "Liver.h"
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 int liver_cmp_by_age(const Liver *a, const Liver *b) {
     if (!a || !b) return 0;
@@ -33,4 +35,12 @@ Liver *liver_copy(const Liver *src) {
 
 void liver_free(Liver *l) {
     free(l);
+}
+
+void* liver_copy_func(const void *src) {
+    return (void*)liver_copy((const Liver *)src);
+}
+
+void liver_free_func(void *data) {
+    liver_free((Liver *)data);
 }

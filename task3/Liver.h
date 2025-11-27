@@ -22,4 +22,7 @@ int liver_equal(const Liver *a, const Liver *b);
 Liver *liver_copy(const Liver *src);
 void liver_free(Liver *l);
 
+void* liver_copy_func(const void *src);
+void liver_free_func(void *data);
+
 #endif
